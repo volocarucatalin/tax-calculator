@@ -1,7 +1,7 @@
-package com.tax_calculator.controllers;
+package com.controllers;
 
-import com.tax_calculator.Requests.ContractorRequest;
-import com.tax_calculator.services.ContractorService;
+import com.request.ContractorRequest;
+import com.services.ContractorService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

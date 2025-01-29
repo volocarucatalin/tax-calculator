@@ -1,4 +1,4 @@
-package com.tax_calculator.entities;
+package com.entities;
 
 import jakarta.persistence.*;
 

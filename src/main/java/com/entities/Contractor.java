@@ -1,8 +1,7 @@
-package com.tax_calculator.entities;
+package com.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

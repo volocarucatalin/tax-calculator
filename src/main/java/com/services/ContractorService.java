@@ -1,10 +1,9 @@
-package com.tax_calculator.services;
+package com.services;
 
-import com.tax_calculator.Requests.ContractorRequest;
-import com.tax_calculator.entities.Contractor;
-import com.tax_calculator.repositoris.ContractorRepository;
+import com.request.ContractorRequest;
+import com.entities.Contractor;
+import com.repositoris.ContractorRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 

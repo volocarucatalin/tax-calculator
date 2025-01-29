@@ -1,10 +1,9 @@
-package com.tax_calculator.controllers;
+package com.controllers;
 
-import com.tax_calculator.Requests.SubContractorRequest;
-import com.tax_calculator.services.SubContractorService;
+import com.request.SubContractorRequest;
+import com.services.SubContractorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

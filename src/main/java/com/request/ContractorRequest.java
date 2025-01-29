@@ -1,11 +1,7 @@
-package com.tax_calculator.Requests;
+package com.request;
 
 
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class ContractorRequest implements Serializable {
