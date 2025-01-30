@@ -2,6 +2,7 @@ package com.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "sub_contractor")
@@ -21,11 +22,21 @@ public class SubContractor {
     @Column
     private String utr;
 
+    @Column
+    private String email;
+
+    @Column
+    private String password;
+
 
 
     @JoinColumn
     @ManyToOne
     private Contractor contractor;
+
+    @JoinColumn
+    @OneToMany
+    private List<Invoice> invoices;
 
     public int getId() {
         return id;
@@ -59,6 +70,22 @@ public class SubContractor {
         this.utr = utr;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Contractor getContractor() {
         return contractor;
     }
@@ -67,16 +94,11 @@ public class SubContractor {
         this.contractor = contractor;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SubContractor that = (SubContractor) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(utr, that.utr) && Objects.equals(contractor, that.contractor);
+    public List<Invoice> getInvoices() {
+        return invoices;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, utr, contractor);
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }
