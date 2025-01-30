@@ -1,6 +1,6 @@
-package com.tax_calculator.repositoris;
+package com.repositoris;
 
-import com.tax_calculator.entities.Contractor;
+import com.entities.Contractor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

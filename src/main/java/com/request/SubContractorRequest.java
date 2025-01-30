@@ -1,4 +1,4 @@
-package com.tax_calculator.Requests;
+package com.request;
 
 
 import java.io.Serializable;

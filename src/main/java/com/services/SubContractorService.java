@@ -1,8 +1,8 @@
-package com.tax_calculator.services;
+package com.services;
 
-import com.tax_calculator.Requests.SubContractorRequest;
-import com.tax_calculator.entities.SubContractor;
-import com.tax_calculator.repositoris.SubContractorRepository;
+import com.request.SubContractorRequest;
+import com.entities.SubContractor;
+import com.repositoris.SubContractorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
