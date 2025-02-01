@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   mysql:
     image: mysql:8.0
@@ -8,13 +7,18 @@ services:
       MYSQL_DATABASE: taxcalculator
       MYSQL_USER: catalin
       MYSQL_PASSWORD: catalin
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d/
     ports:
       - "3306:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
-      timeout: 5s
-      retries: 3
+      timeout: 3s
+      retries: 10
+    networks:
+      - app-network
+
 
   app:
     build:
@@ -25,12 +29,17 @@ services:
       mysql:
         condition: service_healthy
     ports:
-      - "8087:8087"
+      - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/taxcalculator
       - SPRING_DATASOURCE_USERNAME=catalin
       - SPRING_DATASOURCE_PASSWORD=catalin
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQLDialect
+    networks:
+      - app-network
+
+
 
 networks:
   app-network:
