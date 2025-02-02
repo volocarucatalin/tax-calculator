@@ -1,4 +1,4 @@
-package com.tax_calculator.services;
+package com.services;
 
 import org.springframework.stereotype.Service;
 

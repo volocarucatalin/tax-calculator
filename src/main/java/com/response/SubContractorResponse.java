@@ -1,4 +1,4 @@
-package com.tax_calculator.response;
+package com.response;
 
 public class SubContractorResponse {
     private String firstName;

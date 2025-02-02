@@ -6,6 +6,7 @@ import com.repositoris.ContractorRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @Service
@@ -30,5 +31,9 @@ public class ContractorService {
             contractorRepository.save(contractor);
         }
 
+    }
+
+    public List<Contractor> getAllContractors() {
+        return contractorRepository.findAll();
     }
 }
