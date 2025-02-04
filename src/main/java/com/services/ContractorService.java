@@ -18,21 +18,6 @@ public class ContractorService {
         this.contractorRepository = contractorRepository;
     }
 
-    public void createContractor(ContractorRequest contractorRequest) throws IOException {
-        
-        Contractor contractor = new Contractor();
-        contractor.setCompanyName(contractorRequest.getName());
-        contractor.setAddress(contractorRequest.getAddress());
-       contractor.setEmail(contractorRequest.getEmail());
-       contractor.setPassword(contractorRequest.getPassword());
-        if(contractor.equals(contractorRepository.findById(contractor.getId()))){
-            System.out.println("Contractor already exists");
-        }else{
-            contractorRepository.save(contractor);
-        }
-
-    }
-
     public List<Contractor> getAllContractors() {
         return contractorRepository.findAll();
     }

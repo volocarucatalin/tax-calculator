@@ -1,56 +1,35 @@
 package com.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Objects;
 
-@Setter
-@Getter
-@Entity(name="contractor")
+@Data
+@Entity(name = "contractors")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Contractor {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int  id;
-
-    @Column
+    @Column(name = "user_id")
+    private int userId;
+    @Column(name = "company_name")
     private String companyName;
-
-    @Column
-    private String lastName;
-
-    @Column
-    private String firstName;
-
     @Column
     private String address;
-
-    @Column
-    private String email;
-
-    @Column
-    private String password;
-
-    @Column
-    private String role;
-
-
-    @JoinColumn
-    @OneToMany
-    private List<SubContractor> subContractorList;
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Contractor that = (Contractor) o;
-        return id == that.id && Objects.equals(companyName, that.companyName) && Objects.equals(lastName, that.lastName) && Objects.equals(firstName, that.firstName) && Objects.equals(address, that.address) && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(role, that.role) && Objects.equals(subContractorList, that.subContractorList);
+        return userId == that.userId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, companyName, lastName, firstName, address, email, password, role, subContractorList);
+        return Objects.hashCode(userId);
     }
 }

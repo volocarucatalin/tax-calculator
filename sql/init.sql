@@ -1,41 +1,30 @@
-CREATE
-    TABLE contractor
-(
-    id       int NOT NULL AUTO_INCREMENT,
-    address  varchar(255) DEFAULT NULL,
-    email    varchar(255) DEFAULT NULL,
-    name     varchar(255) DEFAULT NULL,
-    password varchar(255) DEFAULT NULL,
-    PRIMARY KEY (id)
-);
-CREATE TABLE sub_contractor
-(
-    contractor_id          int          DEFAULT NULL,
-    id                     int NOT NULL AUTO_INCREMENT,
-    sub_contractor_list_id int          DEFAULT NULL,
-    first_name             varchar(255) DEFAULT NULL,
-    last_name              varchar(255) DEFAULT NULL,
-    utr                    varchar(255) DEFAULT NULL,
-    PRIMARY KEY (id),
-    KEY FKqhp0ayg565tbguobj62jsphsn (contractor_id),
-    KEY FKhgp34640pff2wfwv1qa5yj94w (sub_contractor_list_id),
-    CONSTRAINT FKhgp34640pff2wfwv1qa5yj94w FOREIGN KEY (sub_contractor_list_id) REFERENCES contractor (id),
-    CONSTRAINT FKqhp0ayg565tbguobj62jsphsn FOREIGN KEY (contractor_id) REFERENCES contractor (id)
-);
-
-
+-- Users Table
 CREATE TABLE users
 (
-    id        BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY, -- Primary key
-    email     VARCHAR(255) NOT NULL,                            -- Email field
-    password  VARCHAR(255) NOT NULL,                            -- Password field
-    first_name VARCHAR(255) NOT NULL,
-    last_name  VARCHAR(255) NOT NULL,
-    role      VARCHAR(20)  NOT NULL
+    id    BIGINT                                        NOT NULL AUTO_INCREMENT PRIMARY KEY, -- Unique user ID (Primary Key)
+    email      VARCHAR(255)                                  NOT NULL UNIQUE,                     -- Email (must be unique)
+    password   VARCHAR(255)                                  NOT NULL,                            -- Encrypted password
+    first_name VARCHAR(255)                                  NOT NULL,                            -- First name
+    last_name  VARCHAR(255)                                  NOT NULL,                            -- Last name
+    role       ENUM ('CONTRACTOR', 'SUBCONTRACTOR', 'ADMIN') NOT NULL                             -- Role specification
 );
 
-CREATE TABLE invoices
+-- Contractors Table
+CREATE TABLE contractors
 (
-    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY
+    user_id BIGINT NOT NULL PRIMARY KEY,             -- Primary key, linked to `users`
+    address VARCHAR(255) DEFAULT NULL,               -- Contractor's address
+    company_name   VARCHAR(255) DEFAULT NULL,        -- Contact compan yname
+    FOREIGN KEY (user_id) REFERENCES users (id) -- Link to `users`
 );
-commit;
+
+-- Subcontractors Table
+CREATE TABLE subcontractors
+(
+    user_id       BIGINT NOT NULL PRIMARY KEY,                  -- Primary key, linked to `users`
+    contractor_id BIGINT NOT NULL,                              -- Links subcontractor to a contractor
+    utr           VARCHAR(255) DEFAULT NULL UNIQUE,             -- Unique Taxpayer Reference (UTR)
+    FOREIGN KEY (user_id) REFERENCES users (id),           -- Link to `users`
+    FOREIGN KEY (contractor_id) REFERENCES contractors (user_id) -- Link to `contractor`
+);
+
