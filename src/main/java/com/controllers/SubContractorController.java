@@ -19,11 +19,6 @@ public class SubContractorController {
         this.multipartConfigElement = multipartConfigElement;
     }
 
-    @PostMapping("/sub/add")
-    public void createSubContractor(@RequestBody SubContractorRequest subContractorRequest) {
-        subContractorService.creteSubContractor(subContractorRequest);
-    }
-
     @GetMapping("/sub/get")
     public ResponseEntity<?> getSubContractors(){
         return ResponseEntity.status(HttpStatus.OK).body(subContractorService.getAllSubContractors());

@@ -19,19 +19,6 @@ public class SubContractorService {
         this.subContractorRepository = subContractorRepository;
     }
 
-
-    public void creteSubContractor(SubContractorRequest subContractorRequest) {
-        SubContractor subContractor = new SubContractor();
-        subContractor.setFirstName(subContractorRequest.getFirstName());
-        subContractor.setLastName(subContractorRequest.getLastName());
-
-        if(!subContractorRepository.existsById(subContractor.getId())) {
-            subContractorRepository.save(subContractor);
-        }else{
-            System.out.println("SubContractor already exists");
-        }
-    }
-
     public List<SubContractor> getAllSubContractors() {
         return subContractorRepository.findAll();
     }
@@ -47,13 +34,14 @@ public class SubContractorService {
 
     public void updateSubContractor(int id, SubContractorRequest subContractorRequest) {
 
+        //TODO: I need to see if this is necessary
         Optional<SubContractor> subContractor = subContractorRepository.findById(id);
 
         if(subContractor.isPresent()) {
-            subContractor.get().setFirstName(subContractorRequest.getFirstName());
-            subContractor.get().setLastName(subContractorRequest.getLastName());
-            subContractor.get().setEmail(subContractorRequest.getEmail());
-            subContractor.get().setPassword(subContractorRequest.getPassword());
+//            subContractor.get().setFirstName(subContractorRequest.getFirstName());
+//            subContractor.get().setLastName(subContractorRequest.getLastName());
+//            subContractor.get().setEmail(subContractorRequest.getEmail());
+//            subContractor.get().setPassword(subContractorRequest.getPassword());
         } else{
             throw new RuntimeException("SubContractor don't exists");
         }

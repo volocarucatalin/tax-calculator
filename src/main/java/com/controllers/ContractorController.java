@@ -20,12 +20,6 @@ public class ContractorController {
     public ContractorController(ContractorService contractorService) {
         this.contractorService = contractorService;
     }
-
-    @PostMapping("/con/add")
-    public void createContractor(@RequestBody ContractorRequest contractorRequest) throws IOException {
-        contractorService.createContractor(contractorRequest);
-    }
-
     @PutMapping("con/update/{id}")
     public void updateContractor(@PathVariable int id, @RequestBody ContractorRequest contractorRequest) throws IOException {
 
