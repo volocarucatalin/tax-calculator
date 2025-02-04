@@ -21,7 +21,7 @@ public class ContractorService {
     public void createContractor(ContractorRequest contractorRequest) throws IOException {
         
         Contractor contractor = new Contractor();
-        contractor.setName(contractorRequest.getName());
+        contractor.setCompanyName(contractorRequest.getName());
         contractor.setAddress(contractorRequest.getAddress());
        contractor.setEmail(contractorRequest.getEmail());
        contractor.setPassword(contractorRequest.getPassword());
