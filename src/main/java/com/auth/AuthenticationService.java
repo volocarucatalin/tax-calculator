@@ -40,7 +40,7 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
 
-        Contractor contractor = contractorRepository.save(new Contractor(user.getId(), "companyname", "address"));
+        Contractor contractor = contractorRepository.save(new Contractor(user.getId(), request.getCompanyName(), request.getAddress()));
         LOGGER.info("We create contract with used id:{}", contractor.getUserId());
 
         var jwtToken = jwtService.generateToken(user);
