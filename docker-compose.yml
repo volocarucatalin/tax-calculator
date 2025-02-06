@@ -21,10 +21,12 @@ services:
 
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: openjdk:17-jdk-slim
     container_name: tax-calculator
+    working_dir: /app
+    volumes:
+      - ./target/tax-calculator-0.0.1.jar:/app/app.jar # Mount the JAR file
+    command: ["java", "-jar", "app.jar"] # run the application
     depends_on:
       mysql:
         condition: service_healthy
