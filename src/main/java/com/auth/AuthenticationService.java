@@ -59,10 +59,13 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
 
-            SubContractor subContractor = subcontractorRepository.save(new SubContractor(user.getId(), request.getContractorId(), request.getUtr()));
+        SubContractor subContractor = subcontractorRepository.save(new SubContractor(user.getId(), request.getContractorId(), request.getUtr()));
         LOGGER.info("We create sub-contract with used id:{} for contractor with id:{}", subContractor.getUserId(), subContractor.getContractorId());
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .userId(user.getId())
+                .build();
     }
 
 
@@ -74,6 +77,9 @@ public class AuthenticationService {
                 ));
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .userId(user.getId())
+                .build();
     }
 }
