@@ -19,8 +19,8 @@ public class SubContractorService {
         this.subContractorRepository = subContractorRepository;
     }
 
-    public List<SubContractor> getAllSubContractors() {
-        return subContractorRepository.findAll();
+    public List<SubContractor> getAllSubContractorsByContractorId( Integer contractorId) {
+        return subContractorRepository.findAllByContractorId(contractorId);
     }
 
     public SubContractor getSubContractorById(int id) {

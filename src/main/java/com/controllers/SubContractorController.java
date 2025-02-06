@@ -19,9 +19,9 @@ public class SubContractorController {
         this.multipartConfigElement = multipartConfigElement;
     }
 
-    @GetMapping("/sub/get")
-    public ResponseEntity<?> getSubContractors(){
-        return ResponseEntity.status(HttpStatus.OK).body(subContractorService.getAllSubContractors());
+    @GetMapping("/{contractorId}")
+    public ResponseEntity<?> getSubContractorsByContractorId(@PathVariable Integer contractorId ) {
+        return ResponseEntity.status(HttpStatus.OK).body(subContractorService.getAllSubContractorsByContractorId(contractorId));
     }
 
     @GetMapping("sub/get/{id}")

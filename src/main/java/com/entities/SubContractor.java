@@ -13,10 +13,10 @@ public class SubContractor {
 
     @Id
     @Column(name = "user_id")
-    private int userId;
+    private Integer userId;
 
     @Column
-    private int contractorId;
+    private Integer contractorId;
     @Column
     private String utr;
 
