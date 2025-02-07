@@ -15,10 +15,16 @@ public class Invoice {
     private int id;
 
     @Column
+    private int subContractorId;
+
+    @Column
+    private int contractorId;
+
+    @Column
     private String jobName;
 
     @Column
-    private String month;
+    private int month;
 
     @Column
     private int numberOfDays;
