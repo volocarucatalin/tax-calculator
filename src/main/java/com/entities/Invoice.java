@@ -3,6 +3,7 @@ package com.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Data
@@ -24,7 +25,7 @@ public class Invoice {
     private String jobName;
 
     @Column
-    private LocalDate date;
+    private Date date;
 
     @Column
     private int days;
