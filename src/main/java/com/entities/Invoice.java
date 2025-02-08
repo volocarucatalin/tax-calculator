@@ -1,11 +1,11 @@
 package com.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+import java.time.LocalDate;
+
+@Data
 @Entity(name = "Invoices")
 public class Invoice {
 
@@ -14,24 +14,24 @@ public class Invoice {
     @Column
     private int id;
 
-    @Column
+    @Column(name = "subcontractor_id")
     private int subContractorId;
 
-    @Column
+    @Column(name = "contractor_id")
     private int contractorId;
 
-    @Column
+    @Column(name = "job_name")
     private String jobName;
 
     @Column
-    private int month;
+    private LocalDate date;
 
     @Column
-    private int numberOfDays;
+    private int days;
 
     @Column
-    private double dayRate;
+    private double amount;
 
-    @Column
-    private int status;
+    @Enumerated(EnumType.STRING)
+    private InvoiceStatus status;
 }
