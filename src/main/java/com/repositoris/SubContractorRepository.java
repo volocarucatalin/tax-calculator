@@ -10,6 +10,8 @@ import java.util.Optional;
 @Repository
 public interface SubContractorRepository extends JpaRepository<SubContractor, Integer> {
 
+   SubContractor findByUserId(Integer userId);
+
    List< SubContractor> findAllByContractorId(Integer contractorId);
 
 
