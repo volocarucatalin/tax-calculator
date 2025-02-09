@@ -36,7 +36,7 @@ public class SubContractorService {
         }
     }
 
-    public SubContractor updateSubContractor(int id, SubContractorRequest subContractorRequest) {
+    public SubContractor updateSubContractor(Integer id, SubContractorRequest subContractorRequest) {
         Optional<SubContractor> subContractor = subContractorRepository.findById(id);
         if (subContractor.isEmpty()) {
             return null;
