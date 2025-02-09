@@ -1,12 +1,9 @@
 package com.controllers;
 
 import com.request.InvoiceRequest;
-import com.services.InvoiceService;
+import com.services.InvoiceService;import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/invoices")
@@ -22,5 +19,10 @@ public class InvoiceController {
     public void registerInvoice(@RequestBody InvoiceRequest invoiceRequest) {
           invoiceService.createInvoice(invoiceRequest);
     }
+    @GetMapping("/{subContractorId}")
+    public ResponseEntity<?> getInvoicesBySubContractorId(@PathVariable Integer subContractorId) {
+        return ResponseEntity.status(HttpStatus.OK).body(invoiceService.getInvoicesBySubContractorId(subContractorId));
+    }
+
 
 }
