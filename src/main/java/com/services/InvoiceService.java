@@ -9,6 +9,8 @@ import com.request.InvoiceRequest;
 import com.response.SubContractorResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
@@ -33,5 +35,9 @@ public class InvoiceService {
         invoice.setJobName(invoiceRequest.getJobName());
         invoice.setStatus(InvoiceStatus.PENDING);
         invoiceRepository.save(invoice);
+    }
+
+    public List<Invoice> getInvoicesBySubContractorId(Integer subContractorId) {
+        return invoiceRepository.findAllBySubContractorId(subContractorId);
     }
 }
