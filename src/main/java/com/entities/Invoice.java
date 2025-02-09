@@ -33,6 +33,7 @@ public class Invoice {
     @Column
     private double amount;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 }

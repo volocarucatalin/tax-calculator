@@ -32,12 +32,12 @@ CREATE TABLE subcontractors
 CREATE table invoices
 (
 
-    id               BIGINT                             NOT NULL PRIMARY KEY,
+    id               BIGINT                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
     contractor_id    BIGINT                             NOT NULL,
     subcontractor_id BIGINT                             NOT NULL,
     job_name         VARCHAR(255)     DEFAULT NULL UNIQUE,
-    data             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
+    date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
     days             INT              DEFAULT 0,
     amount           DOUBLE PRECISION DEFAULT 0.0,
-    status           VARCHAR(8)       DEFAULT 'PENDING' NOT NULL
+    status           VARCHAR(8)       DEFAULT 'PENDING'
 );
