@@ -36,19 +36,18 @@ public class SubContractorService {
         }
     }
 
-    public SubContractor updateSubContractor(Integer id, SubContractorRequest subContractorRequest) {
-        Optional<SubContractor> subContractor = subContractorRepository.findById(id);
+    public SubContractor updateSubContractor(Integer subContractorId, String newSubContractorRequestUTR) {
+        Optional<SubContractor> subContractor = subContractorRepository.findById(subContractorId);
         if (subContractor.isEmpty()) {
             return null;
         }
-        subContractor.get().setUtr(subContractorRequest.getUtr());
+        subContractor.get().setUtr(newSubContractorRequestUTR);
 
         Optional<User> userOptional = userRepository.findById(subContractor.get().getUserId());
         if (userOptional.isEmpty()) {
             return null;
         }
-        userOptional.get().setFirstName(subContractorRequest.getFirstName());
-        userOptional.get().setLastName(subContractorRequest.getLastName());
+
         subContractorRepository.save(subContractor.get());
         userRepository.save(userOptional.get());
         return subContractor.get();
@@ -61,5 +60,9 @@ public class SubContractorService {
         } else {
             throw new RuntimeException("SubContractor not found");
         }
+    }
+
+    public SubContractor getSubContractorByContractorId(Integer contractorId) {
+        return subContractorRepository.findByContractorId(contractorId);
     }
 }

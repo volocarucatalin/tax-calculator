@@ -40,4 +40,8 @@ public class InvoiceService {
     public List<Invoice> getInvoicesBySubContractorId(Integer subContractorId) {
         return invoiceRepository.findAllBySubContractorId(subContractorId);
     }
+
+    public List<Invoice> getInvoicesByContractorId(Integer contractorId) {
+            return invoiceRepository.findAllByContractorId(contractorId);
+    }
 }

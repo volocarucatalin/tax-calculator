@@ -15,4 +15,5 @@ public interface SubContractorRepository extends JpaRepository<SubContractor, In
    List< SubContractor> findAllByContractorId(Integer contractorId);
 
 
+    SubContractor findByContractorId(Integer contractorId);
 }
