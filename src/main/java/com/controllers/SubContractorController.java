@@ -22,18 +22,18 @@ public class SubContractorController {
         return ResponseEntity.status(HttpStatus.OK).body(subContractorService.getAllSubContractorsByContractorId(contractorId));
     }
 
-    @GetMapping("sub/get/{id}")
-    public ResponseEntity<?> getSubContractorById(@PathVariable int id) {
-        if (subContractorService.getSubContractorById(id) != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(subContractorService.getSubContractorById(id));
+    @GetMapping("get-sub/{contractorId}")
+    public ResponseEntity<?> getSubContractorByContractorId(@PathVariable Integer contractorId) {
+        if (subContractorService.getSubContractorById(contractorId) != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(subContractorService.getSubContractorByContractorId(contractorId));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("SubContractor not found");
         }
     }
 
-    @PutMapping("sub/put/{id}")
-    public ResponseEntity<?> updateSubContractor(@PathVariable int id, @RequestBody SubContractorRequest subContractorRequest) {
-        SubContractor subContractor = subContractorService.updateSubContractor(id, subContractorRequest);
+    @PutMapping("update/{subContractorId}")
+    public ResponseEntity<?> updateSubContractor(@PathVariable Integer subContractorId, @RequestBody String newSubContractorUTR) {
+        SubContractor subContractor = subContractorService.updateSubContractor(subContractorId, newSubContractorUTR);
         if (subContractor != null) {
             return ResponseEntity.status(HttpStatus.OK).body("SubContractor has been update");
         } else {

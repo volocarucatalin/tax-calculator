@@ -19,10 +19,17 @@ public class InvoiceController {
     public void registerInvoice(@RequestBody InvoiceRequest invoiceRequest) {
           invoiceService.createInvoice(invoiceRequest);
     }
-    @GetMapping("/{subContractorId}")
+    @GetMapping("/sub-contractor/{subContractorId}")
     public ResponseEntity<?> getInvoicesBySubContractorId(@PathVariable Integer subContractorId) {
         return ResponseEntity.status(HttpStatus.OK).body(invoiceService.getInvoicesBySubContractorId(subContractorId));
     }
+
+    @GetMapping("/contractor/{contractorId}")
+    public ResponseEntity<?> getInvoicesByContractorId(@PathVariable Integer contractorId) {
+        return ResponseEntity.status(HttpStatus.OK).body(invoiceService.getInvoicesByContractorId(contractorId));
+    }
+
+
 
 
 }
