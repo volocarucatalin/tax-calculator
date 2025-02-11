@@ -11,7 +11,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubContractorRequest implements Serializable {
-
     private String firstName;
     private String lastName;
     private String utr;
