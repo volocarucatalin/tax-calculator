@@ -1,7 +1,7 @@
 package com.controllers;
 
-import com.entities.SubContractor;
 import com.request.SubContractorRequest;
+import com.response.SubContractorResponse;
 import com.services.SubContractorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +31,11 @@ public class SubContractorController {
         }
     }
 
-    @PutMapping("update/{subContractorId}")
-    public ResponseEntity<?> updateSubContractor(@PathVariable Integer subContractorId, @RequestBody String newSubContractorUTR) {
-        SubContractor subContractor = subContractorService.updateSubContractor(subContractorId, newSubContractorUTR);
-        if (subContractor != null) {
-            return ResponseEntity.status(HttpStatus.OK).body("SubContractor has been update");
+    @PutMapping("/{subContractorId}")
+    public ResponseEntity<?> updateSubContractor(@PathVariable Integer subContractorId, @RequestBody SubContractorRequest subContractorRequest) {
+        SubContractorResponse response = subContractorService.updateSubContractor(subContractorId, subContractorRequest);
+        if (response != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("SubContractor not found");
         }

@@ -4,6 +4,7 @@ import com.repositoris.UserRepository;
 import com.request.SubContractorRequest;
 import com.entities.SubContractor;
 import com.repositoris.SubContractorRepository;
+import com.response.SubContractorResponse;
 import com.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,21 +37,26 @@ public class SubContractorService {
         }
     }
 
-    public SubContractor updateSubContractor(Integer subContractorId, String newSubContractorRequestUTR) {
-        Optional<SubContractor> subContractor = subContractorRepository.findById(subContractorId);
-        if (subContractor.isEmpty()) {
+    public SubContractorResponse updateSubContractor(Integer subContractorId, SubContractorRequest subContractorRequest) {
+        SubContractor subContractor = subContractorRepository.findByUserId(subContractorId);
+        if (subContractor == null) {
             return null;
         }
-        subContractor.get().setUtr(newSubContractorRequestUTR);
+        subContractor.setUtr(subContractorRequest.getUtr());
 
-        Optional<User> userOptional = userRepository.findById(subContractor.get().getUserId());
+        Optional<User> userOptional = userRepository.findById(subContractor.getUserId());
         if (userOptional.isEmpty()) {
             return null;
         }
-
-        subContractorRepository.save(subContractor.get());
+        userOptional.get().setFirstName(subContractorRequest.getFirstName());
+        userOptional.get().setLastName(subContractorRequest.getLastName());
+        subContractorRepository.save(subContractor);
         userRepository.save(userOptional.get());
-        return subContractor.get();
+        return SubContractorResponse.builder()
+                .userId(subContractor.getUserId())
+                .utr(subContractor.getUtr())
+                .lastName(userOptional.get().getLastName())
+                .firstName(userOptional.get().getLastName()).build();
     }
 
     public void deleteById(int id) {
