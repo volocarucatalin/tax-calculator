@@ -11,4 +11,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
     List<Invoice> findAllBySubContractorId(Integer subContractorId);
 
     List<Invoice> findAllByContractorId(Integer contractorId);
+
+    Invoice findBySubContractorId(Integer subContractorId);
 }
