@@ -9,6 +9,7 @@ import com.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,21 @@ public class SubContractorService {
         this.userRepository = userRepository;
     }
 
-    public List<SubContractor> getAllSubContractorsByContractorId(Integer contractorId) {
-        return subContractorRepository.findAllByContractorId(contractorId);
+    public List<SubContractorResponse> getAllSubContractorsByContractorId(Integer contractorId) {
+        List<SubContractorResponse> subContractorResponses = new ArrayList<>();
+        List<SubContractor> subContractors = subContractorRepository.findAllByContractorId(contractorId);
+        for (SubContractor subContractor : subContractors) {
+            Optional<User> userOptional = userRepository.findById(subContractor.getUserId());
+            if (userOptional.isEmpty()) {
+                continue;
+            }
+            subContractorResponses.add(SubContractorResponse.builder()
+                    .userId(subContractor.getUserId())
+                    .utr(subContractor.getUtr())
+                    .lastName(userOptional.get().getLastName())
+                    .firstName(userOptional.get().getFirstName()).build());
+        }
+        return subContractorResponses;
     }
 
     public SubContractor getSubContractorById(int id) {
