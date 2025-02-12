@@ -1,12 +1,11 @@
 package com.services;
 
-import com.request.ContractorRequest;
 import com.entities.Contractor;
 import com.repositoris.ContractorRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -20,5 +19,9 @@ public class ContractorService {
 
     public List<Contractor> getAllContractors() {
         return contractorRepository.findAll();
+    }
+
+    public Optional<Contractor> findById(int contractorId) {
+        return contractorRepository.findById(contractorId);
     }
 }
