@@ -29,6 +29,16 @@ public class InvoiceController {
         return ResponseEntity.status(HttpStatus.OK).body(invoiceService.getInvoicesByContractorId(contractorId));
     }
 
+    @PutMapping("/{invoiceId}")
+    public ResponseEntity<?> updateStatus(@PathVariable Integer invoiceId  , @RequestBody String status) {
+        boolean response = invoiceService.updateInvoice(invoiceId,status);
+        if(response){
+            return ResponseEntity.status(HttpStatus.OK).body("Invoice has been updated");
+        }else
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invoice not found");
+
+    }
+
 
 
 

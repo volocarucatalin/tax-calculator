@@ -15,6 +15,7 @@ import java.sql.Date;
 @Data
 public class InvoiceResponseContractor {
 
+    private Integer invoiceId;
     private String firstName;
     private String lastName;
     private String utr;

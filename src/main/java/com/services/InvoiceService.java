@@ -50,9 +50,9 @@ public class InvoiceService {
 
     public List<InvoiceResponseSubContractor> getInvoicesBySubContractorId(Integer subContractorId) {
         List<InvoiceResponseSubContractor> invoiceResponseSubContractors = new ArrayList<>();
-        if(subContractorId == null){
+        if (subContractorId == null) {
             return null;
-        }else{
+        } else {
             for (Invoice invoice : invoiceRepository.findAllBySubContractorId(subContractorId)) {
                 InvoiceResponseSubContractor invoiceResponseSubContractor = new InvoiceResponseSubContractor();
                 Optional<Contractor> contractor = contractorService.findById(invoice.getContractorId());
@@ -63,8 +63,6 @@ public class InvoiceService {
                 invoiceResponseSubContractor.setJobName(invoice.getJobName());
                 invoiceResponseSubContractor.setStatus(invoice.getStatus());
                 invoiceResponseSubContractors.add(invoiceResponseSubContractor);
-                invoiceResponseSubContractors.add(
-                        invoiceResponseSubContractor);
             }
         }
         return invoiceResponseSubContractors;
@@ -72,14 +70,15 @@ public class InvoiceService {
 
     public List<InvoiceResponseContractor> getInvoicesByContractorId(Integer contractorId) {
         List<InvoiceResponseContractor> invoiceResponseContractors = new ArrayList<>();
-        if (contractorId == null){
+        if (contractorId == null) {
             return null;
-        }else {
+        } else {
             for (Invoice invoice : invoiceRepository.findAllByContractorId(contractorId)) {
                 SubContractor subContractor = subContractorRepository.findByUserId(invoice.getSubContractorId());
                 InvoiceResponseContractor invoiceResponseContractor = new InvoiceResponseContractor();
                 invoiceResponseContractor.setUtr(subContractor.getUtr());
                 User user = userRepository.findById(invoice.getSubContractorId()).get();
+                invoiceResponseContractor.setInvoiceId(invoice.getId());
                 invoiceResponseContractor.setFirstName(user.getFirstName());
                 invoiceResponseContractor.setLastName(user.getLastName());
                 invoiceResponseContractor.setAmount(invoice.getAmount());
@@ -92,6 +91,17 @@ public class InvoiceService {
             }
         }
 
-            return invoiceResponseContractors;
+        return invoiceResponseContractors;
+    }
+
+    public boolean updateInvoice(Integer invoiceId, String status) {
+            Optional<Invoice> invoice = invoiceRepository.findById(invoiceId);
+            if (invoice.isPresent()) {
+                invoice.get().setStatus(InvoiceStatus.valueOf(status));
+                invoiceRepository.save(invoice.get());
+                return true;
+            }
+
+        return false;
     }
 }
