@@ -1,12 +1,12 @@
 -- Users Table
 CREATE TABLE users
 (
-    id         BIGINT                                        NOT NULL AUTO_INCREMENT PRIMARY KEY, -- Unique user ID (Primary Key)
-    email      VARCHAR(255)                                  NOT NULL UNIQUE,                     -- Email (must be unique)
-    password   VARCHAR(255)                                  NOT NULL,                            -- Encrypted password
-    first_name VARCHAR(255)                                  NOT NULL,                            -- First name
-    last_name  VARCHAR(255)                                  NOT NULL,                            -- Last name
-    role       ENUM ('CONTRACTOR', 'SUBCONTRACTOR', 'ADMIN') NOT NULL                             -- Role specification
+    id         BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,      -- Unique user ID (Primary Key)
+    email      VARCHAR(255) NOT NULL UNIQUE,                          -- Email (must be unique)
+    password   VARCHAR(255) NOT NULL,                                 -- Encrypted password
+    first_name VARCHAR(255) NOT NULL,                                 -- First name
+    last_name  VARCHAR(255) NOT NULL,                                 -- Last name
+    role       ENUM ('CONTRACTOR', 'SUBCONTRACTOR', 'ADMIN') NOT NULL -- Role specification
 );
 
 -- Contractors Table
@@ -32,12 +32,15 @@ CREATE TABLE subcontractors
 CREATE table invoices
 (
 
-    id               BIGINT                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    contractor_id    BIGINT                             NOT NULL,
-    subcontractor_id BIGINT                             NOT NULL,
-    job_name         VARCHAR(255)     DEFAULT NULL UNIQUE,
+    id               BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    contractor_id    BIGINT NOT NULL,
+    subcontractor_id BIGINT NOT NULL,
+    job_name         VARCHAR(255)     DEFAULT NULL,
     date             TIMESTAMP        DEFAULT CURRENT_TIMESTAMP,
     days             INT              DEFAULT 0,
     amount           DOUBLE PRECISION DEFAULT 0.0,
-    status           VARCHAR(8)       DEFAULT 'PENDING'
+    status           VARCHAR(9)       DEFAULT 'PENDING',
+    FOREIGN KEY (contractor_id) REFERENCES contractors (user_id),      -- Link to `contractors`
+    FOREIGN KEY (subcontractor_id) REFERENCES subcontractors (user_id) -- Link to `subcontractors`
 );
+
