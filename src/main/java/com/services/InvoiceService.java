@@ -57,6 +57,7 @@ public class InvoiceService {
                 InvoiceResponseSubContractor invoiceResponseSubContractor = new InvoiceResponseSubContractor();
                 Optional<Contractor> contractor = contractorService.findById(invoice.getContractorId());
                 contractor.ifPresent(value -> invoiceResponseSubContractor.setCompanyName(value.getCompanyName()));
+                invoiceResponseSubContractor.setInvoiceId(invoice.getId());
                 invoiceResponseSubContractor.setAmount(invoice.getAmount());
                 invoiceResponseSubContractor.setDays(invoice.getDays());
                 invoiceResponseSubContractor.setDate(invoice.getDate());
@@ -103,5 +104,14 @@ public class InvoiceService {
             }
 
         return false;
+    }
+
+    public boolean deletePendingInvoice(Integer id) {
+        Invoice invoice = invoiceRepository.findById(id).orElseThrow();
+            if (invoice.getStatus() == InvoiceStatus.PENDING){
+                invoiceRepository.deleteById(id);
+                return true;
+            }
+            return false;
     }
 }

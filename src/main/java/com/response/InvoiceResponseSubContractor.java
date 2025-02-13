@@ -11,6 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Data
 public class InvoiceResponseSubContractor {
+    private Integer invoiceId;
     private String companyName;
     private String jobName;
     private Date date;

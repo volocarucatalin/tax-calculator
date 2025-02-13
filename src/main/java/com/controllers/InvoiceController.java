@@ -39,6 +39,15 @@ public class InvoiceController {
 
     }
 
+    @DeleteMapping("/{Id}")
+    public ResponseEntity<?> deleteInvoice(@PathVariable Integer Id){
+        boolean response = invoiceService.deletePendingInvoice(Id);
+        if(response){
+            return ResponseEntity.status(HttpStatus.OK).body("Invoice has been deleted");
+        }else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invoice not found");
+    }
+
 
 
 
